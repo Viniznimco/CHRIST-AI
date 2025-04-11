@@ -1,0 +1,105 @@
+{
+  "name": "CHRISF AI",
+  "description": "ᴀ ᴊᴀᴠᴀsᴄʀɪᴘᴛ ʙᴏᴛ ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ CHRISTINE ZENA",
+  "logo": "https://files.catbox.moe/ntcw8m.jpg",
+  "keywords": ["CHRISTINE-ZENA", "whatsapp-bot", "whatsapp-md-bot"],
+  "repository": "https://github.com/Viniznimco/CHRIST-AI",
+  "stack": "container",
+  "env": { 
+  
+    "SESSION_ID": {
+      "description": "Ensure your session Id starts with the word CHRIST-AI~$",
+      "required": true,
+      "value": ""
+    },
+    "MODE": {
+      "description": "Set to 'public' or 'private' to define bot mode",
+      "required": true,
+      "value": "public"
+    },
+    "PREFIX": {
+      "description": "paste your bot prefix note! Don't apply null prefix.",
+      "required": false,
+      "value": "."
+    },
+    "OWNER_NAME": {
+      "description": "Your name as the bot owner",
+      "required": true,
+      "value": "CHRISTINE ZENA"
+    },
+    "OWNER_NUMBER": {
+      "description": "Your WhatsApp number",
+      "required": true,
+      "value": "254750737434"
+    },
+    "AUTO_READ": {
+      "description": "Enable bot to auto-read messages (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "AUTO_TYPING": {
+      "description": "Enable bot to show typing status (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "AUTO_RECORDING": {
+      "description": "Enable bot to show recording status (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "ALWAYS_ONLINE": {
+      "description": "Keep bot always online (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "AUTO_REACT": {
+      "description": "Enable bot to auto-react to messages (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "AUTO_STATUS_SEEN": {
+      "description": "Enable bot to view statuses (true/false)",
+      "required": false,
+      "value": "true"
+    },
+    "AUTO_STATUS_REPLY": {
+      "description": "Enable bot to reply after viewing a status (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "STATUS_READ_MSG": {
+      "description": "Set the message bot sends after viewing a status",
+      "required": false,
+      "value": "*Status Seen*"
+    },
+    "AUTO_BIO": {
+      "description": "make it true if you want the bot to update de bio after restart",
+      "required": false,
+      "value": "false"
+    },
+    "AUTO_BLOCK": {
+      "description": "Enable bot to auto-block specific numbers (true/false)",
+      "required": false,
+      "value": "false"
+    },
+    "REJECT_CALL": {
+      "description": "Enable bot to reject incoming calls (true/false)",
+      "required": false,
+      "value": "false"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    },
+    {
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+    }
+  ]
+  }
