@@ -97,7 +97,7 @@ async function start() {
             version,
             logger: pino({ level: 'silent' }),
             printQRInTerminal: useQR,
-            browser: ["CRISS-AI", "safari", "3.3"],
+            browser: ["CHRIST-AI", "safari", "3.3"],
             auth: state,
             getMessage: async (key) => {
                 if (store) {
