@@ -1,5 +1,3 @@
-
-
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -50,22 +48,20 @@ if (!fs.existsSync(sessionDir)) {
     fs.mkdirSync(sessionDir, { recursive: true });
 }
 
-  //===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
-if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const sessdata = config.SESSION_ID.replace("Junior~", '');
-const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-filer.download((err, data) => {
-if(err) throw err
-fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
-console.log("Session downloaded ✅")
-})})}
-  
-  const express = require("express");
-  const app = express();
-  const port = process.env.PORT || 9090;
-  
-  //=============================================
+async function downloadSessionData() {
+    console.log("Debugging SESSION_ID:", config.SESSION_ID);
+
+    if (!config.SESSION_ID) {
+        console.error('❌ Please add your session to SESSION_ID env !!');
+        return false;
+    }
+
+    const sessdata = config.SESSION_ID.split("CHRIST-AI~")[1];
+
+    if (!sessdata || !sessdata.includes("#")) {
+        console.error('❌ Invalid SESSION_ID format! It must contain both file ID and decryption key.');
+        return false;
+    }
 
     const [fileID, decryptKey] = sessdata.split("#");
 
@@ -93,20 +89,20 @@ async function start() {
     try {
         const { state, saveCreds } = await useMultiFileAuthState(sessionDir);
         const { version, isLatest } = await fetchLatestBaileysVersion();
-        console.log(`using WA v${version.join('.')}, isLatest: ${isLatest}`);
+        console.log(`🤖 CHRIST-MD using WA v${version.join('.')}, isLatest: ${isLatest}`);
         
         const Matrix = makeWASocket({
             version,
             logger: pino({ level: 'silent' }),
             printQRInTerminal: useQR,
-            browser: ["CHRIST-AI", "safari", "3.3"],
+            browser: ["CHRIST-MD", "safari", "3.3"],
             auth: state,
             getMessage: async (key) => {
                 if (store) {
                     const msg = await store.loadMessage(key.remoteJid, key.id);
                     return msg.message || undefined;
                 }
-                return { conversation: "whatsapp user bot" };
+                return { conversation: " christ ai whatsapp user bot" };
             }
         });
 
@@ -118,21 +114,24 @@ Matrix.ev.on('connection.update', (update) => {
         }
     } else if (connection === 'open') {
         if (initialConnection) {
-            console.log(chalk.green("Connected Successfull"));
+            console.log(chalk.green("Connected Successfully CHRIST Ai 🤍"));
             Matrix.sendMessage(Matrix.user.id, { 
                 image: { url: "https://files.catbox.moe/ntcw8m.jpg" }, 
-                caption: `*╭─────────────━┈⊷*
- *│ ᴄʜʀɪsᴛ-ᴀɪ ᴄᴏɴɴᴇᴄᴛᴇᴅ sᴜᴄᴄᴇssғᴜʟ*
-*╰─────────────━┈⊷*
+                caption: `*Hello there User! 👋🏻* 
 
-*╭─────────────━┈⊷*
- *│ᴄʜʀɪsᴛ ᴀɪ ɪs ᴏɴʟɪɴᴇ*
- *│ᴘʀᴇғɪx : [${config.PREFIX}*]
- *│ᴍᴏᴅᴇ :[ ${config.MODE}*]
- *│ᴏᴡɴᴇʀ: ᴄʜʀɪsᴛ ᴄʜʀɪsᴛɪɴᴇ*
-*╰─────────────━┈⊷*
+> Simple, Straightforward, But Loaded With Features 🎊. Meet CHRIST-AI WhatsApp Bot.
 
-*ᴘᴏᴡᴇʀᴇᴅ ʙʏ ʟᴏʀᴅ ᴄʜʀɪsᴛ ᴄʜʀɪsᴛɪɴᴇ*`
+*Thanks for using CHRIST AI 🚩* 
+
+> Join WhatsApp Channel: ⤵️  
+https://whatsapp.com/channel/0029Vb6jFwj89ine3b7qHB1y
+
+- *YOUR PREFIX:* = ${prefix}
+
+Don't forget to give a star to the repo ⬇️  
+https://github.com/Viniznimco/CHRIST-AI
+
+> © REGARDS CHRISTY`
             });
             initialConnection = false;
         } else {
@@ -180,15 +179,8 @@ Matrix.ev.on('connection.update', (update) => {
             await Matrix.readMessages([mek.key]);
             
             if (config.AUTO_STATUS_REPLY) {
-                const customMessage = config.STATUS_READ_MSG || '✅ Auto Status Seen Bot';
+                const customMessage = config.STATUS_READ_MSG || '✅ Auto Status Seen Bot By CHRIST-MD';
                 await Matrix.sendMessage(fromJid, { text: customMessage }, { quoted: mek });
-            }
-
-            // React to the status message with ❤️ if SLIKE is enabled
-            if (config.SLIKE) {
-                const emoji = '❤️';  // Use the ❤️ emoji for auto-react
-                console.log(`Reacting to status with emoji: ${emoji}`);
-                await doReact(emoji, mek, Matrix);
             }
         }
     } catch (err) {
@@ -222,9 +214,10 @@ async function init() {
 init();
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.send('Hello World!');
 });
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
