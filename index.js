@@ -50,20 +50,22 @@ if (!fs.existsSync(sessionDir)) {
     fs.mkdirSync(sessionDir, { recursive: true });
 }
 
-async function downloadSessionData() {
-    console.log("Debugging SESSION_ID:", config.SESSION_ID);
-
-    if (!config.SESSION_ID) {
-        console.error('Please add your session to SESSION_ID env !!');
-        return false;
-    }
-
-    const sessdata = config.SESSION_ID.split("CHRIST-AI~")[1];
-
-    if (!sessdata || !sessdata.includes("#")) {
-        console.error('Invalid SESSION_ID format! It must contain both file ID and decryption key.');
-        return false;
-    }
+  //===================SESSION-AUTH============================
+if (!fs.existsSync(__dirname + '/sessions/creds.json')) {
+if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
+const sessdata = config.SESSION_ID.replace("Junior~", '');
+const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
+filer.download((err, data) => {
+if(err) throw err
+fs.writeFile(__dirname + '/sessions/creds.json', data, () => {
+console.log("Session downloaded ✅")
+})})}
+  
+  const express = require("express");
+  const app = express();
+  const port = process.env.PORT || 9090;
+  
+  //=============================================
 
     const [fileID, decryptKey] = sessdata.split("#");
 
