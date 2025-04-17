@@ -1,4 +1,3 @@
-// Securitized by Christy Zena
 import axios from "axios";
 import yts from "yt-search";
 import config from '../config.cjs';
@@ -55,4 +54,3 @@ const play = async (m, gss) => {
 };
 
 export default play;
-
