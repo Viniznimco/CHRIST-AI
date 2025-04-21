@@ -41,4 +41,4 @@
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a><a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 
 
-[![FOLLOW OUR WHATSAPP CHANNEL](https://raw.githubusercontent.com/Neeraj-x0/Neeraj-x0/main/photos/suddidina-join-whatsapp.png)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FViniznimco%2FCHRIST-AI)
+[![FOLLOW OUR WHATSAPP CHANNEL](https://raw.githubusercontent.com/Neeraj-x0/Neeraj-x0/main/photos/suddidina-join-instagram.png)](https://dashboard.heroku.com/new?template=https%3A%2F%2Fgithub.com%2FViniznimco%2FCHRIST-AI)
